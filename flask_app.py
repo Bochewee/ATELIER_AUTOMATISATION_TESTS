@@ -7,15 +7,15 @@ import os
 
 app = Flask(__name__)
 
-# ---------------------------------------------------------------------------
+
 # Chemin de la BDD SQLite
-# ---------------------------------------------------------------------------
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH  = os.path.join(BASE_DIR, "monitoring.db")
 
-# ---------------------------------------------------------------------------
+
 # Init BDD
-# ---------------------------------------------------------------------------
+
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -49,9 +49,9 @@ def init_db():
     conn.commit()
     conn.close()
 
-# ---------------------------------------------------------------------------
+
 # Configuration des tests Open-Meteo
-# ---------------------------------------------------------------------------
+
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
 
 TESTS_CONFIG = [
@@ -121,9 +121,9 @@ TESTS_CONFIG = [
     },
 ]
 
-# ---------------------------------------------------------------------------
+
 # Exécution des tests + sauvegarde SQLite
-# ---------------------------------------------------------------------------
+
 def run_and_save_tests():
     results = []
     response_times = []
@@ -220,9 +220,7 @@ def get_execution_details(exec_id):
         print(f"[DB ERROR] {e}")
         return None, []
 
-# ---------------------------------------------------------------------------
-# Templates HTML
-# ---------------------------------------------------------------------------
+
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -461,9 +459,7 @@ DETAIL_TEMPLATE = """
 </html>
 """
 
-# ---------------------------------------------------------------------------
-# Routes
-# ---------------------------------------------------------------------------
+
 @app.route("/")
 def index():
     try:
@@ -514,7 +510,7 @@ def history_detail(exec_id):
     return render_template_string(DETAIL_TEMPLATE, execution=execution, results=results)
 
 
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     init_db()
     print(f"[DB] SQLite initialisée → {DB_PATH}")

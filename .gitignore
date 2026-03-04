@@ -1,0 +1,4 @@
+monitoring.db
+__pycache__/
+*.pyc
+venv/
